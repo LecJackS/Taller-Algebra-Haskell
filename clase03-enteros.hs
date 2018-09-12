@@ -3,8 +3,13 @@
 --
 -- 1 unidades : dado un entero, devuelve el digito de las unidades del numero
 --             el digito menos significativo).
+signo :: Integer -> Integer
+signo x | x >= 0 = 1
+        | otherwise = (-1)
 unidades :: Integer -> Integer
-unidades x = mod x 10 
+unidades x = (signo x) * (mod (abs x) 10)
+-- variante linda, usando la funcion rem
+unidades2 x = rem x 10 
 -- 2 sumaUnidades3 : dados 3 enteros, devuelve la suma de los digitos de las
 --                  unidades de los 3 numeros.
 sumaUnidades3 :: Integer -> Integer -> Integer -> Integer
@@ -38,4 +43,4 @@ alMenosDosPares a b c = not (alMenosDosImpares a b c)
 --             suponemos que los datos ingresados siempre seran validos, o sea,
 --             siempre estaran dentro del dominio de la funcion.
 alMenosUnMultiploDe :: Integer -> Integer -> Integer -> Bool
-alMenosUnMultiploDe a b c = ((mod c a) == 0) || ((mod c b) == 0)
+alMenosUnMultiploDe a b c = ((rem c a) == 0) || ((rem c b) == 0)

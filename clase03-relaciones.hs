@@ -7,10 +7,10 @@ r1 :: Integer -> Integer -> Bool
 r1 a b = mod a 2 == mod b 2
 -- 8.2 - a ∼ b si 2a + 3b es divisible por 5.
 r2 :: Integer -> Integer -> Bool
-r2 a b = (mod (2*a + 3*b) 5) == 0
+r2 a b = (rem (2*a + 3*b) 5) == 0
 -- 8.3 - a ∼ b si los digitos de las unidades de a, b y a*b son todos distintos.
 uni :: Integer -> Integer
-uni x = mod x 10
+uni x = rem x 10
 -- Aclaracion: si los digitos de las unidades son distintos, los digitos del
 --             producto de los mismos tambien lo son, por lo que no hace falta
 --             agregar (uni (a*b)) en la funcion
