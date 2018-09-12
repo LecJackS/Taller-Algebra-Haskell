@@ -1,1 +1,1 @@
-Taller-Algebra-Haskell
+Ejercicios del Taller Algebra I en Haskell
