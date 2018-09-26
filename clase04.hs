@@ -43,4 +43,3 @@ a3 n | n == 1 = (-3)
 -- f :: Integer -> Bool
 -- f n | n == 1 = True
 --     | n > 1  = not (f (n-1))
-% n d = mod n d
