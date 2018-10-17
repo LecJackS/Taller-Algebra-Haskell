@@ -38,6 +38,8 @@
 -- head [[2]]
 -- [2]
 
+-------------------------------------------------------------------
+
 -- Ejercicios:
 -- Definir la funcion listar :: a -> a -> a -> [a]
 -- que toma 3 elementos y los convierte
