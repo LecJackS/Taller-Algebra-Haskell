@@ -38,8 +38,6 @@
 -- head [[2]]
 -- [2]
 
--------------------------------------------------------------------
-
 -- Ejercicios:
 -- Definir la funcion listar :: a -> a -> a -> [a]
 -- que toma 3 elementos y los convierte
@@ -162,16 +160,38 @@ ordenados :: [Integer] -> Bool
 ordenados [x] = True
 ordenados (x:xs) | x > head(xs) = False
                  | otherwise = ordenados xs
--- compara de a dos de izq a derecha, y mueve el mayor hacia la derecha
+
+-- compara de a dos de izq a derecha, y mueve el mayor hacia la derecha,
 ordenarAux :: Integer -> [Integer] -> [Integer]
 ordenarAux n [] = [n]
 ordenarAux n (x:xs) | n <= x = n:ordenarAux x xs
                     | otherwise = x:ordenarAux n xs
--- hace pasadas de ordenarAux hasta que la lista este ordenada
+
+-- hace pasadas de ordenarAux ordenando la lista desde atras hacia adelante 
+-- de mayor a menor hasta que la lista este ordenada
+
 ordenar :: [Integer] -> [Integer]
 ordenar [x] = [x]
 ordenar (x:xs) | ordenados (x:xs) == True = (x:xs)
                | otherwise = ordenar (ordenarAux x xs)
 
+
+-- probar implementar ordenar con
+---- una funcion que devuelve el minimo
+---- una que elimina n de xs (ya ehcha)
+---- una recursiva que pone minimo tras minimo (solo dos lineas necesarias)
+---- acepta lista vacia
+
+min' :: Integer -> [Integer] -> Integer
+min' _ [x] = x
+min' m (x:xs) | m <= x =  min' m xs
+              | otherwise = min' x xs
+
+--quitar n xs
+
+ordenar' :: [Integer] -> [Integer]
+ordenar' [] = []
+ordenar' (x:xs) = (min' x xs):ordenar' xsSinMin
+                where xsSinMin = quitar (min' x xs) xs
 
 
