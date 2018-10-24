@@ -197,3 +197,55 @@ cajas k = [[]]++(cajas (k-1))
 -----
 -- FIN DE BOLITAS (:D!)
 
+--- BolitasSmart, hecho por el profe:
+
+sumarN :: Integer -> [Integer] -> [Integer]
+sumarN _ [] = []
+sumarN n (x:xs) = (x+n):(sumarN n xs)
+
+-- Devuelve el conjunto de indices de todas las ocurrencias de n en la lista
+-- > 2 [1,2,3,2,3,2] -->> [2,4,6]
+todasLasOcurrencias :: Integer -> [Integer] -> Set Integer
+todasLasOcurrencias _ [] = []
+todasLasOcurrencias n (x:xs) | n == x = 1:(sumarN 1 (todasLasOcurrencias n xs))
+                             | otherwise = sumarN 1 (todasLasOcurrencias n xs)
+
+-- biyeccion entre variaciones y bolitasSmart
+configuracionAPartirDeVariacion :: Integer -> [Integer] -> [Set Integer]
+configuracionAPartirDeVariacion 0 _ = []
+configuracionAPartirDeVariacion k xs = configuracionAPartirDeVariacion (k-1) xs ++
+                                       [todasLasOcurrencias k xs]
+
+aplicarFuncionACadaElemento :: Integer -> Set [Integer] -> [[Set Integer]]
+aplicarFuncionACadaElemento k [] = []
+aplicarFuncionACadaElemento k (x:xs) = configuracionAPartirDeVariacion k x :
+                                       aplicarFuncionACadaElemento k xs
+
+bolitasSmart :: Integer -> Integer -> [[Set Integer]]
+bolitasSmart n k = aplicarFuncionACadaElemento k (variaciones [1..k] n)
+
+----
+
+-- 2. Todas las listas ordenadas de k numeros DISTINTOS tomados del conjunto { 1 ,..., n } 
+-- 2 [1,2,3] -->> [1,2],[1,3],[2,1],[2,3],[3,1],[3,2],... y las mismas pero en orden inverso 
+
+-- 3.
+
+-- 4. 
+
+-- 5. Combinatoria
+-- subconjuntos :: Integer -> Integer -> Set (Set Integer)
+-- dados k y n enteros, genera todos los subconjuntos
+-- de k elementos del conjunto { 1 , 2 , 3 ,..., n } .
+-- recordar triangulo de pascal:
+--           |n| = |n-1| + |n-1|
+--           |k|   | k |   |k-1|
+
+triangPascal :: Integer -> Integer -> Integer
+triangPascal 0 0 = 1
+triangPascal _ 0 = 1
+triangPascal n k | n == k = 1
+                 | otherwise = (triangPascal (n-1) k) + (triangPascal (n-1) (k-1))
+
+--subconjuntos :: Integer -> Integer -> Set (Set Integer)
+--subconjuntos 0 0 = []
